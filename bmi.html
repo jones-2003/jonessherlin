@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url(image/jo\ 1.webp);
+        }
+        .container {
+            background: #fff;
+            padding: 20px;
+            outline: 1px solid black;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        input[type="number"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>BMI Calculator</h1>
+        <label for="weight">Weight (kg):</label>
+        <input type="number" id="weight" placeholder="Enter weight" required>
+        <label for="height">Height (cm):</label>
+        <input type="number" id="height" placeholder="Enter height" required>
+        <button onclick="calculateBMI()">Calculate BMI</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function calculateBMI() {
+            var weight = document.getElementById('weight').value;
+            var height = document.getElementById('height').value;
+
+            if (weight > 0 && height > 0) {
+                height = height / 100; // Convert height from cm to meters
+                var bmi = weight / (height * height);
+                var result = document.getElementById('result');
+                result.innerHTML = 'Your BMI is ' + bmi.toFixed(2);
+
+                // Add BMI categories
+                if (bmi < 18.5) {
+                    result.innerHTML += ' (Underweight)';
+                } else if (bmi >= 18.5 && bmi < 24.9) {
+                    result.innerHTML += ' (Normal weight)';
+                } else if (bmi >= 25 && bmi < 29.9) {
+                    result.innerHTML += ' (Overweight)';
+                } else {
+                    result.innerHTML += ' (Obesity)';
+                }
+            } else {
+                alert('Please enter valid weight and height.');
+            }
+        }
+    </script>
+</body>
+</html>
